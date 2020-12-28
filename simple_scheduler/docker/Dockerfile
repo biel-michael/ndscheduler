@@ -1,15 +1,8 @@
-FROM ubuntu:14.04
+FROM python:3.9.1
 
-MAINTAINER Wenbin Fang <wenbin@nextdoor.com>
-
-RUN apt-get -qq update && \
-    apt-get -qq install python-virtualenv git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN virtualenv /mnt/scheduler && \
+RUN python3 -m venv /mnt/scheduler && \
     . /mnt/scheduler/bin/activate && \
-    pip install -e git+https://github.com/Nextdoor/ndscheduler.git#egg=ndscheduler && \
+    pip install -e git+https://github.com/biel-michael/ndscheduler.git#egg=ndscheduler && \
     pip install -r /mnt/scheduler/src/ndscheduler/simple_scheduler/requirements.txt
 
 ADD apns.pem /mnt/scheduler/

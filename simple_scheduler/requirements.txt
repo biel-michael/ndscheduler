@@ -1,5 +1,7 @@
 # Additional dependencies for simple_scheduler only
 
+tornado
+
 # This apns library's release version still doesn't support python 3.5!
 git+git://github.com/djacobs/PyAPNs.git#egg=PyAPNs
 

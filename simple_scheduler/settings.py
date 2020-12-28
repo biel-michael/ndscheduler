@@ -5,7 +5,6 @@ import logging
 #
 # Override settings
 #
-DEBUG = True
 
 HTTP_PORT = 8888
 HTTP_ADDRESS = '0.0.0.0'

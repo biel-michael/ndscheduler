@@ -1,0 +1,33 @@
+
+name: Scheduler Deployment CI Pipeline
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches:
+      - master
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  deploy: 
+    runs-on: [self-hosted, bastion]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy code
+      run: |
+        echo "Start building docker image on bastion host"
+        cd simple_scheduler/docker
+        docker container stop $(docker container ls -q --filter name=ndscheduler) && docker rm ndscheduler
+        docker build -t ndscheduler --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" .
+        docker run -d -p 127.0.0.1:8888:8888 --mount type=bind,source=/datastore.db,target=/datastore.db --name=ndscheduler ndscheduler
+        echo "Bastion host built and started scheduler"
+      env: # Or as an environment variable
+        DB_PWD: ${{ secrets.DB_PWD }}
+        LEAVER_DB_PWD: ${{ secrets.LEAVER_DB_PWD }}
+        FANQIER_APP_ID: ${{ secrets.FANQIER_APP_ID }}
+        FANQIER_APP_SECRET: ${{ secrets.FANQIER_APP_SECRET }}
+        FANQIER_PUSH_TOKEN: ${{ secrets.FANQIER_PUSH_TOKEN }}
+        TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+        TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}

@@ -31,3 +31,4 @@ jobs:
         FANQIER_PUSH_TOKEN: ${{ secrets.FANQIER_PUSH_TOKEN }}
         TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
         TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+        INT_EMAIL_PWD: ${{ secrets.INT_EMAIL_PWD }}

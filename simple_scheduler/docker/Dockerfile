@@ -17,7 +17,7 @@ RUN echo "$ssh_prv_key" > /root/.ssh/id_rsa && \
 RUN python3 -m venv /mnt/scheduler && \
     . /mnt/scheduler/bin/activate && \
     pip install -e git+https://github.com/biel-michael/ndscheduler.git#egg=ndscheduler && \
-    pip install -r /mnt/scheduler/src/ndscheduler/simple_scheduler/requirements.txt
+    pip install --no-cache-dir -r /mnt/scheduler/src/ndscheduler/simple_scheduler/requirements.txt 
 
 RUN rm -rf /root/.ssh/
 

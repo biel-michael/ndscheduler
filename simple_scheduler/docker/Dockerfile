@@ -25,4 +25,6 @@ ADD apns.pem /mnt/scheduler/
 ADD run_scheduler /mnt/scheduler/bin/run_scheduler
 RUN chmod 755 /mnt/scheduler/bin/run_scheduler
 
+EXPOSE 8888
+
 CMD ["/mnt/scheduler/bin/run_scheduler"]

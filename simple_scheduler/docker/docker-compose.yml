@@ -1,0 +1,19 @@
+
+version: '3.4'
+
+services:
+  ndscheduler:
+    image: ndscheduler
+    environment:
+      - LEAVER_DB_PWD
+      - DB_PWD
+      - FANQIER_APP_ID
+      - FANQIER_APP_SECRET
+      - FANQIER_PUSH_TOKEN
+      - TENCENT_SECRET_ID
+      - TENCENT_SECRET_KEY
+      - INT_EMAIL_PWD
+    ports:
+      - "127.0.0.1:8888:8888"
+    volumes:
+      - /datastore.db:/datastore.db

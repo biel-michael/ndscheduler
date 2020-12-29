@@ -19,9 +19,8 @@ jobs:
       run: |
         echo "Start building docker image on bastion host"
         cd simple_scheduler/docker
-        docker container stop $(docker container ls -q --filter name=ndscheduler) && docker rm ndscheduler
-        docker build -t ndscheduler --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" .
-        docker run -d -p 127.0.0.1:8888:8888 --env DB_PWD=${DB_PWD} INT_EMAIL_PWD=${INT_EMAIL_PWD} --mount type=bind,source=/datastore.db,target=/datastore.db --name=ndscheduler ndscheduler
+        docker build -t ndscheduler --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" .
+        docker-compose up -d
         echo "Bastion host built and started scheduler"
       env: # Or as an environment variable
         DB_PWD: ${{ secrets.DB_PWD }}
@@ -31,4 +30,3 @@ jobs:
         FANQIER_PUSH_TOKEN: ${{ secrets.FANQIER_PUSH_TOKEN }}
         TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
         TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
-        INT_EMAIL_PWD: ${{ secrets.INT_EMAIL_PWD }}

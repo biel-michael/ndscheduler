@@ -1,13 +1,10 @@
 # Nextdoor Scheduler
 
-![Apache](https://img.shields.io/hexpm/l/plug.svg) 
-[![Build Status](https://travis-ci.org/Nextdoor/ndscheduler.svg)](https://travis-ci.org/Nextdoor/ndscheduler)
+``ndscheduler`` is a flexible python library for building your own cron-like system to schedule jobs, which is to run a tornado process to serve REST APIs and a web UI. This is a fork from [Nextdoor's ndscheduler](https://github.com/Nextdoor/ndscheduler).
 
-``ndscheduler`` is a flexible python library for building your own cron-like system to schedule jobs, which is to run a tornado process to serve REST APIs and a web ui.
+We have customized the build process and the type of jobs that can be executed via the UI.
 
-Check out our blog post - [We Don't Run Cron Jobs at Nextdoor](https://engblog.nextdoor.com/we-don-t-run-cron-jobs-at-nextdoor-6f7f9cc62040#.d2erw1pl6)
-
-**``ndscheduler`` currently supports Python 2 & 3 on Mac OS X / Linux.**
+Check out Nextdoor's blog post - [We Don't Run Cron Jobs at Nextdoor](https://engblog.nextdoor.com/we-don-t-run-cron-jobs-at-nextdoor-6f7f9cc62040#.d2erw1pl6)
 
 ## Table of contents
   
@@ -38,46 +35,11 @@ Note: ``corescheduler`` can also be used independently within your own service i
 
 From source code:
 
-    git clone https://github.com/Nextdoor/ndscheduler.git
+    git clone https://github.com/biel-michael/ndscheduler.git
     cd ndscheduler
     make simple
-
-Or use docker:
-
-    docker run -it -p 8888:8888 wenbinf/ndscheduler
     
-Open your browser and go to [localhost:8888](http://localhost:8888). 
-
-**Demo**
-(Click for fullscreen play)
-![ndscheduler demo](https://giant.gfycat.com/NastyBossyBeaver.gif)
-
 ## How to build Your own cron-replacement
-
-### Install ndscheduler
-Using pip (from GitHub repo)
-
-    #
-    # Put this in requirements.txt, then run
-    #    pip install -r requirements.txt
-    #
-
-    # If you want the latest build
-    git+https://github.com/Nextdoor/ndscheduler.git#egg=ndscheduler
-
-    # Or put this if you want a specific commit
-    git+https://github.com/Nextdoor/ndscheduler.git@5843322ebb440d324ca5a66ba55fea1fd00dabe8
-
-    # Or put this if you want a specific tag version
-    git+https://github.com/Nextdoor/ndscheduler.git@v0.1.0#egg=ndscheduler
-    
-    #
-    # Run from command line
-    #
-
-    pip install -e git+https://github.com/Nextdoor/ndscheduler.git#egg=ndscheduler
-
-(We'll upload the package to PyPI soon.)
 
 ### Three things
 

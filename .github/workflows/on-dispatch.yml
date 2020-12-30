@@ -1,0 +1,26 @@
+name: Handle update-scheduler dispatch request
+on:
+  repository_dispatch:
+    types: [update-scheduler]
+jobs:
+  # copy main.yml's deploy job
+  deploy-dependency-update:
+    runs-on: [self-hosted, bastion]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy code
+      run: |
+        echo "Start building docker image on bastion host"
+        cd simple_scheduler/docker
+        docker build -t ndscheduler --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" .
+        docker-compose up -d --always-recreate-deps --remove-orphans
+        echo "Bastion host built and started scheduler"
+      env: # Or as an environment variable
+        DB_PWD: ${{ secrets.DB_PWD }}
+        LEAVER_DB_PWD: ${{ secrets.LEAVER_DB_PWD }}
+        FANQIER_APP_ID: ${{ secrets.FANQIER_APP_ID }}
+        FANQIER_APP_SECRET: ${{ secrets.FANQIER_APP_SECRET }}
+        FANQIER_PUSH_TOKEN: ${{ secrets.FANQIER_PUSH_TOKEN }}
+        TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+        TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+        INT_EMAIL_PWD: ${{ secrets.INT_EMAIL_PWD }}

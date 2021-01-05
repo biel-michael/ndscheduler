@@ -7,7 +7,7 @@ import logging
 #
 
 HTTP_PORT = 8888
-HTTP_ADDRESS = '0.0.0.0'
+HTTP_ADDRESS = '127.0.0.1'
 
 #
 # Set logging level

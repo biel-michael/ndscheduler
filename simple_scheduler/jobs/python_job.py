@@ -1,5 +1,6 @@
 """A job to run python executable programs."""
 
+
 from subprocess import call
 
 from ndscheduler.corescheduler import job
@@ -27,4 +28,4 @@ class PythonJob(job.JobBase):
 if __name__ == "__main__":
     # You can easily test this job here
     job = PythonJob.create_test_instance()
-    job.run('python', '-m', 'fanqier.helpers')
+    job.run('EMAIL_ENV=test', 'python', '-m', 'hr_recipients.email_manual')

@@ -11,8 +11,6 @@ requests
 # FastAPI library
 git+ssh://git@github.com/BIEL-Datalab/fastapi.git
 
-
-
 # Uncomment this if you want to use Postgres as datastore
 #
 # psycopg2 == 2.6.1

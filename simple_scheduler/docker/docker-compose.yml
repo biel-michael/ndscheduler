@@ -1,5 +1,4 @@
-
-version: '3.4'
+version: "3.4"
 
 services:
   ndscheduler:
@@ -13,6 +12,8 @@ services:
       - TENCENT_SECRET_ID
       - TENCENT_SECRET_KEY
       - INT_EMAIL_PWD
+      - PERSONAL_EMAIL_PWD
+      - JIRA_API_TOKEN
     ports:
       - "127.0.0.1:8888:8888"
     volumes:

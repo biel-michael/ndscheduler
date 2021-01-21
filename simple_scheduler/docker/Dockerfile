@@ -27,9 +27,12 @@ RUN python3 -m venv /mnt/scheduler && \
     . /mnt/scheduler/bin/activate && \
     pip install -e git+https://github.com/biel-michael/ndscheduler.git#egg=ndscheduler
 
-RUN pip install -e git+ssh://git@github.com-jira-automaton/BIEL-Datalab/jira-automaton.git#egg=jira-automaton
-RUN pip install -e git+ssh://git@github.com-fastapi/BIEL-Datalab/fastapi.git#egg=biel-fastapi
-RUN pip install -r /mnt/scheduler/src/ndscheduler/simple_scheduler/requirements.txt
+RUN . /mnt/scheduler/bin/activate && \
+    pip install -e git+ssh://git@github.com-jira-automaton/BIEL-Datalab/jira-automaton.git#egg=jira-automaton
+RUN . /mnt/scheduler/bin/activate && \
+    pip install -e git+ssh://git@github.com-fastapi/BIEL-Datalab/fastapi.git#egg=biel-fastapi
+RUN . /mnt/scheduler/bin/activate && \
+    pip install --no-cache-dir -r /mnt/scheduler/src/ndscheduler/simple_scheduler/requirements.txt
 
 RUN rm -rf /root/.ssh/
 

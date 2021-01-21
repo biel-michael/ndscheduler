@@ -11,6 +11,9 @@ requests
 # FastAPI library
 git+ssh://git@github.com/BIEL-Datalab/fastapi.git
 
+# Jira Automaton library
+git+ssh://git@github.com/BIEL-Datalab/jira-automaton.git
+
 
 # Uncomment this if you want to use Postgres as datastore
 #

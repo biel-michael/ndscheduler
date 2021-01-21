@@ -2,6 +2,9 @@ FROM python:3.9.1
 
 ARG ssh_prv_key
 ARG ssh_pub_key
+ARG ssh_jira_automaton_prv_key
+ARG ssh_jira_automaton_pub_key
+ARG ssh_conf
 
 # Authorize SSH Host
 RUN mkdir -p /root/.ssh && \
@@ -11,8 +14,14 @@ RUN mkdir -p /root/.ssh && \
 # Add the keys and set permissions
 RUN echo "$ssh_prv_key" > /root/.ssh/id_rsa && \
     echo "$ssh_pub_key" > /root/.ssh/id_rsa.pub && \
+    echo "$ssh_jira_automaton_prv_key" > /root/.ssh/id_ed25519_jira_automaton && \
+    echo "$ssh_jira_automaton_pub_key" > /root/.ssh/id_ed25519_jira_automaton.pub && \
+    echo "$ssh_conf" > /root/.ssh/config && \
     chmod 600 /root/.ssh/id_rsa && \
-    chmod 600 /root/.ssh/id_rsa.pub
+    chmod 600 /root/.ssh/id_rsa.pub && \
+    chmod 600 /root/.ssh/id_ed25519_jira_automaton && \
+    chmod 600 /root/.ssh/id_ed25519_jira_automaton.pub && \
+    chmod 600 /root/.ssh/config
 
 RUN python3 -m venv /mnt/scheduler && \
     . /mnt/scheduler/bin/activate && \

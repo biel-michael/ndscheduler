@@ -20,4 +20,4 @@ git+ssh://git@github.com/BIEL-Datalab/fastapi.git
 pymysql == 0.6.7
 
 # Jira Automaton library
-git+ssh://git@github.com/BIEL-Datalab/jira-automaton.git
+git+file://home/user01/jira-automaton-actions-runner/_work/jira-automaton/jira-automaton

@@ -2,7 +2,7 @@
 
 ## Build docker image
 ```bash
-  docker build -t ndscheduler --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" --build-arg ssh_jira_automaton_prv_key="$(cat ~/.ssh/id_ed25519_jira_automaton)" --build-arg ssh_jira_automaton_pub_key="$(cat ~/.ssh/id_ed25519_jira_automaton.pub)" --build-arg ssh_conf="$(cat ~/.ssh/config)" .
+docker build --no-cache -t ndscheduler --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" --build-arg ssh_jira_automaton_prv_key="$(cat ~/.ssh/id_ed25519_jira_automaton)" --build-arg ssh_jira_automaton_pub_key="$(cat ~/.ssh/id_ed25519_jira_automaton.pub)" --build-arg ssh_conf="$(cat ~/.ssh/config)" .
 ```
 
 ## Run a container

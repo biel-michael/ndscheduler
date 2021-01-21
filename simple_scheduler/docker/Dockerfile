@@ -12,21 +12,24 @@ RUN mkdir -p /root/.ssh && \
     ssh-keyscan github.com > /root/.ssh/known_hosts
 
 # Add the keys and set permissions
-RUN echo "$ssh_prv_key" > /root/.ssh/id_rsa && \
-    echo "$ssh_pub_key" > /root/.ssh/id_rsa.pub && \
+RUN echo "$ssh_prv_key" > /root/.ssh/id_ed25519 && \
+    echo "$ssh_pub_key" > /root/.ssh/id_ed25519.pub && \
     echo "$ssh_jira_automaton_prv_key" > /root/.ssh/id_ed25519_jira_automaton && \
     echo "$ssh_jira_automaton_pub_key" > /root/.ssh/id_ed25519_jira_automaton.pub && \
     echo "$ssh_conf" > /root/.ssh/config && \
-    chmod 600 /root/.ssh/id_rsa && \
-    chmod 600 /root/.ssh/id_rsa.pub && \
+    chmod 600 /root/.ssh/id_ed25519 && \
+    chmod 600 /root/.ssh/id_ed25519.pub && \
     chmod 600 /root/.ssh/id_ed25519_jira_automaton && \
     chmod 600 /root/.ssh/id_ed25519_jira_automaton.pub && \
     chmod 600 /root/.ssh/config
 
 RUN python3 -m venv /mnt/scheduler && \
     . /mnt/scheduler/bin/activate && \
-    pip install -e git+https://github.com/biel-michael/ndscheduler.git#egg=ndscheduler && \
-    pip install --no-cache-dir -r /mnt/scheduler/src/ndscheduler/simple_scheduler/requirements.txt 
+    pip install -e git+https://github.com/biel-michael/ndscheduler.git#egg=ndscheduler
+
+RUN pip install -e git+ssh://git@github.com-jira-automaton/BIEL-Datalab/jira-automaton.git#egg=jira-automaton
+RUN pip install -e git+ssh://git@github.com-fastapi/BIEL-Datalab/fastapi.git#egg=biel-fastapi
+RUN pip install -r /mnt/scheduler/src/ndscheduler/simple_scheduler/requirements.txt
 
 RUN rm -rf /root/.ssh/
 

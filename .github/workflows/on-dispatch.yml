@@ -12,7 +12,7 @@ jobs:
         run: |
           echo "Start building docker image on bastion host"
           cd simple_scheduler/docker
-          docker build -t ndscheduler --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" --build-arg ssh_jira_automaton_prv_key="$(cat ~/.ssh/id_ed25519_jira_automaton)" --build-arg ssh_jira_automaton_pub_key="$(cat ~/.ssh/id_ed25519_jira_automaton.pub)" --build-arg ssh_conf="$(cat ~/.ssh/config)" .
+          docker build --nocache -t ndscheduler --build-arg ssh_prv_key="$(cat ~/.ssh/id_ed25519)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_ed25519.pub)" --build-arg ssh_jira_automaton_prv_key="$(cat ~/.ssh/id_ed25519_jira_automaton)" --build-arg ssh_jira_automaton_pub_key="$(cat ~/.ssh/id_ed25519_jira_automaton.pub)" --build-arg ssh_conf="$(cat ~/.ssh/config)" .
           docker-compose up -d --always-recreate-deps --remove-orphans
           echo "Bastion host built and started scheduler"
         env: # Or as an environment variable
